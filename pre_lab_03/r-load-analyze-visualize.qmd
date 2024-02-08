@@ -4,7 +4,7 @@ editor:
     wrap: 72
 ---
 
-# Loading and Analyzing Data {#r-load-analyze-visualize}
+# Loadibyeng and Analyzing Data {#r-load-analyze-visualize}
 
 This tutorial, based on my 2024 presentation for the National Institute
 for Computer Assisted Reporting (NICAR), will show you the essential
@@ -113,13 +113,13 @@ code to the right."
 
 **Click the green arrow code chunk to get the answers below.**
 
-How many rows?
+How many rows? 1658
 
 ```{r}
 nrow(MediaBucks)
 ```
 
-How many columns?
+How many columns? 13
 
 ```{r}
 ncol(MediaBucks)
@@ -224,7 +224,7 @@ MediaBucks %>%
   summarize(Total = sum(Salary, na.rm=TRUE))
 ```
 
-What is the sample size?
+What is the sample size? 1658
 
 ```{r}
 MediaBucks %>% 
@@ -256,6 +256,17 @@ Tidyverse) that produce quick summary tables. See what else you can do
 with [the slice
 commands.](https://dplyr.tidyverse.org/reference/slice.html)
 
+1. Tribune Publishing
+2. The Onion
+3. G/O Media (The Onion)
+4. G/O Media (The Onion)
+5. VoxMedia
+6. ProPublica
+7. Digital_First_Media
+8. The Intercept
+9. NYT
+10. LBI Media
+
 ```{r}
 MediaBucks %>% 
   select(COMPANY, Salary) %>% 
@@ -266,9 +277,12 @@ MediaBucks %>%
 Questions:
 
 ```         
-1: View the range of your data    
-2: Number of rows  
-3: Number of rows cut with filter  
+1: View the range of your data
+$0-770,000
+2: Number of rows
+1658
+3: Number of rows cut with filter
+1553
 ```
 
 <br>
@@ -313,9 +327,12 @@ summary(Reporters$Salary)
 Questions:
 
 ```         
-1: Who is making $230,504 as a reporter???   
-2: Make a table for editors, figure out medians.   
-3: Find highest paid editor. Resent them.   
+1: Who is making $230,504 as a reporter???
+Senior reporter at ProPublica
+2: Make a table for editors, figure out medians.
+$60,240
+3: Find highest paid editor. Resent them.
+$245,000
 4: Make a table for any position involving data  
 ```
 
@@ -401,7 +418,7 @@ How to conduct filter queries from a dataset
 ```
 
 ```{r}
-#your answer here
+#$52,000
 ```
 
 ```         
@@ -409,7 +426,7 @@ How to conduct filter queries from a dataset
 ```
 
 ```{r}
-#your answer here
+#Executive Editor, $350,000
 ```
 
 ```         
@@ -417,7 +434,7 @@ How to conduct filter queries from a dataset
 ```
 
 ```{r}
-#your answer here
+#$50,350
 
 ```
 
