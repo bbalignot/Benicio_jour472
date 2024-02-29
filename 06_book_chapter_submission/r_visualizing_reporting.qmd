@@ -320,8 +320,7 @@ https://github.com/profrobwells/Guest_Lectures/blob/5c2d631aec862cd728ebf49d7114
 
 all_dispo <- SF %>%
   count(disposition) %>%
-  arrange(desc(n)) %>%
-  head(12)
+  slice_max(n, n=12)
 
 ```
 
@@ -331,7 +330,7 @@ Create a bar chart of all_dispo and include a headline and caption
 ```{r}
 all_dispo %>%
   ggplot() +
-  geom_bar(aes(x = reorder(disposition, n), weight=n))
+  geom_bar(aes(x = reorder(disposition, -n), weight=n))
   labs(
       title="Most common 311 resolutions, San Francisco",
       x = "type",
