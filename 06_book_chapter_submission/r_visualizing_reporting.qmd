@@ -300,7 +300,7 @@ Then create a bar chart that colors the bars by arrest total. Include a headline
 
 arrest %>%
   ggplot() +
-  geom_bar(aes(x=year, n=count,))
+  geom_bar(aes(x=year, y=n, weight=n)) +
   labs(
       title="2016-19 Arrests, San Francisco",
       x = "total arrests",
