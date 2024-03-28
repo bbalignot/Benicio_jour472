@@ -1,0 +1,94 @@
+#lab_08
+Sean Mussenden, Aug 16, 2022
+
+## About this lab
+
+To complete this lab, you need to:
+* write code in empty codeblocks provided to answer questions included (look for **Q**).
+* write out the answer in the form of a complete sentence in the space given (look for **A**).
+
+When you are finished, commit changes and push to your personal GitHub repo, then submit the URL to this document on ELMS.
+
+## Load libraries and establish settings
+**Task**: Load janitor and the tidyverse
+```{r}
+library(tidyverse)
+library(janitor)
+```
+
+
+## Load data
+
+**Task**: Load four tables of U.S. Census data.  Each table has one row per Maryland county with 2020 population information.  Each table has these same two columns:
+
+```{r}
+maryland_black_data <- read.csv("data/maryland_black.csv")
+maryland_hispanic_data <- read.csv("data/maryland_hispanic.csv")
+maryland_white_data <- read.csv("data/maryland_white.csv")
+maryland_population_data <- read.csv("data/maryland_population.csv")
+```
+
+
+* geoid - a unique identifier for each county
+* name - the county name
+
+The third column in each table represents the total population in one of four demographic categories.
+
+* maryland_population.csv - total_pop - total population 
+* maryland_hispanic.csv - hispanic_pop - total Hispanic population
+* maryland_white.csv - white_pop - total White alone population
+* maryland_black.csv - black_pop - total Black alone population
+
+Some of the information in the tables may need to be cleaned or validated in order to produce the correct answer.  
+
+## Questions
+
+**Q1**  What Maryland county has the largest Hispanic population (by percentage of total population)? 
+
+```{r}
+fixed_maryland_hispanic_data <- maryland_hispanic_data %>%
+  mutate(name = case_when(
+    name == "Montgomery County,Maryland" ~ "Montgomery County, Maryland",
+    TRUE ~ name
+  ))
+```
+
+
+```{r}
+maryland_hispanic_joined <- fixed_maryland_hispanic_data %>%
+  inner_join(maryland_population_data, by = "geoid", "name") %>%
+  mutate(maryland_hispanic_joined, percent_of_pop = hispanic_pop / total_pop) %>%
+  print(mutated_hispanic_pop)
+  
+```
+
+**A1** 
+Montgomery County has the largest Hispanic population by percentage of total population at nearly 20%.
+
+**Q2**  What is the total population of people who identify as white alone in Maryland? 
+```{r}
+fixed_maryland_white_data <- maryland_white_data %>%
+  mutate(white_pop = case_when(
+    name == "Somerset County, Maryland" ~ 13541,
+    TRUE ~ white_pop
+  ))
+sum(fixed_maryland_white_data$white_pop)
+```
+
+**A2**  
+3275079 people identify as white alone in Maryland.
+
+**Q3** What is the average Black population in all Maryland counties? 
+```{r}
+fixed_maryland_black_data <- maryland_black_data %>%
+  mutate(black_pop = case_when(
+    name == "Baltimore County, Maryland"  ~ 243698,
+    name == "Baltimore city, Maryland" ~ 367387,
+    TRUE ~ black_pop
+  ))
+
+mean(fixed_maryland_black_data$black_pop)
+```
+
+**A3** 
+The average Black population in Maryland counties is 74838.
